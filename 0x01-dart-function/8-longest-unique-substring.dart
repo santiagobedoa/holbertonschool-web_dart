@@ -21,6 +21,6 @@ String longestUniqueSubstring(String str) {
     }
   }
 
-  return str.substring(start, start + maxLength);
+  return str.substring(start, start + maxLength - 1); // Update the substring extraction
 }
 
