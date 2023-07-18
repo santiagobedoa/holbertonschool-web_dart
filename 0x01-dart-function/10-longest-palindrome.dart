@@ -1,6 +1,6 @@
 String longestPalindrome(String s) {
   if (s.length < 3) {
-    return "none\n\n(${s.length} chars long)";
+    return "none";
   }
 
   String longest = "";
@@ -14,11 +14,7 @@ String longestPalindrome(String s) {
     }
   }
 
-  if (longest.isEmpty) {
-    return "none\n\n(${s.length} chars long)";
-  } else {
-    return longest;
-  }
+  return longest.isNotEmpty ? longest : "none";
 }
 
 bool isPalindrome(String s) {
