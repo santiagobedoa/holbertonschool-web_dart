@@ -5,13 +5,15 @@ Future<double> calculateTotal() async {
   try {
     double totalPrice = 0;
     
-    final Map<String, dynamic> userData = json.decode(await fetchUserData());
-    final String userId = userData['id'];
-    final List<dynamic> userOrders = json.decode(await fetchUserOrders(userId));
+    final userData = await fetchUserData();
+    final Map<String, dynamic> userDataMap = json.decode(userData);
+    final String userId = userDataMap['id'];
+    final userOrders = await fetchUserOrders(userId);
 
-    for (int idx = 0; idx < userOrders.length; idx++) {
-      double productPrice = await fetchProductPrice(userOrders[idx]);
-      totalPrice += json.decode(productPrice);
+    for (var product in userOrders) {
+      final productPrice = await fetchProductPrice(product);
+      final double price = json.decode(productPrice);
+      totalPrice += price;
     }
 
     return totalPrice;
